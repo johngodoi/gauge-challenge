@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="gaugeChallengeApp">
+<head>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="../bower_components/underscore/underscore.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../app/js/main.js"></script>
+    <script data-main="scripts/main" src="../js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Gauge Challenge</title>
+</head>
+<body>
+    <h1>Usuários Influentes</h1>
+    <div>
+        <h2>Busca</h2>
+        <label for="user-search">Usuário</label>
+        <input type="search" name="user-search" id="user-search" placeholder="digite o nome do usuário">
+        <label for="brand-search">Marcas</label>
+        <input type="search" name="brand-search" id="brand-search" placeholder="digite o nome da marca">
+    </div>
+    <div class="content">
+        <div ng-controller="UserListController" class="users">
+            <div ng-repeat="userObj in users" class="user">
+                <img src="{{userObj.picture.thumbnail}}" alt="" class="user-image">
+                <div class="user-name">{{userObj.name.title+" "+userObj.name.first+" "+userObj.name.last}}</div>
+                <div class="user-interactions-qtt"></div>
+                <div ng-repeat="interaction in interactions" class="user-interactions" ng-if="interaction.user==userObj.id">
+                    <div class="user-brand-interaction" ng-repeat="brand in brands"  ng-if="interaction.brand==brand.id">
+                        <img src="{{brand.image}}" alt="{{brand.name}}"></div>
+                        <div class="brand-name">{{brand.name}}</div>
+                        {{interaction.type}}
+                        <div class="user-brand-interaction-types">
+                            <div class="user-brand-interaction-favorite"></div>
+                            <div class="user-brand-interaction-comment"></div>
+                            <div class="user-brand-interaction-share"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
