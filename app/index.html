@@ -27,16 +27,14 @@
                 <img src="{{userObj.picture.thumbnail}}" alt="" class="user-image">
                 <div class="user-name">{{userObj.name.title+" "+userObj.name.first+" "+userObj.name.last}}</div>
                 <div class="user-interactions-qtt"></div>
-                <div ng-repeat="interaction in interactions" class="user-interactions" ng-if="interaction.user==userObj.id">
-                    <div class="user-brand-interaction" ng-repeat="brand in brands"  ng-if="interaction.brand==brand.id">
-                        <img src="{{brand.image}}" alt="{{brand.name}}"></div>
-                        <div class="brand-name">{{brand.name}}</div>
-                        {{interaction.type}}
-                        <div class="user-brand-interaction-types">
-                            <div class="user-brand-interaction-favorite"></div>
-                            <div class="user-brand-interaction-comment"></div>
-                            <div class="user-brand-interaction-share"></div>
-                        </div>
+                <div ng-repeat="interaction in userObj.interactions" class="user-interactions">
+                    <img src="{{interaction.brandObj.image}}" alt="{{interaction.brandObj.name}}">
+                    <div class="brand-name">{{interaction.brandObj.name}}</div>
+                    {{interaction.type}}
+                    <div class="user-brand-interaction-types">
+                        <div class="user-brand-interaction-favorite"></div>
+                        <div class="user-brand-interaction-comment"></div>
+                        <div class="user-brand-interaction-share"></div>
                     </div>
                 </div>
             </div>

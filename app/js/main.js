@@ -17,23 +17,34 @@ function getData($http, $scope) {
             return $http.get('../app/json/interactions.json');
         }).then(function (res) {
             $scope.interactions = res.data;
+        }).finally(function() {
+            setUpInteractioncs($scope);
+            $scope.users = _.sortBy($scope.users, function (user) {
+                return user.interactions.length;
+            }).reverse();
+    });
+}
+
+function setUpInteractioncs($scope) {
+
+    _.each($scope.interactions,function (interactionObj) {
+        var usr = _.find($scope.users, function (userObj) {
+            return userObj.id == interactionObj.user;
         });
+        if(!usr.interactions) usr.interactions = [];
+        usr.interactions.push(interactionObj);
+        interactionObj.userObj = usr;
+
+        var brnd = _.find($scope.brands, function (brandObj) {
+            return brandObj.id == interactionObj.brand;
+        });
+        if(!brnd.interactions) brnd.interactions = [];
+        brnd.interactions.push(interactionObj);
+        interactionObj.brandObj = brnd;
+    });
 }
 
 gaugeChallengeApp.controller('UserListController', function UserListController($scope, $http) {
     getData($http, $scope);
 });
 
-gaugeChallengeApp.controller('InteractionListController', function UserListController($scope, $http) {
-    for(var i = 0; i<$scope.users.length;i++){
-        for(var j=0; j<$scope.interactions.length;j++){
-            var user = $scope.users[i];
-            var interaction = $scope.interactions[j];
-            if(!user.interactions) user.interactions = [];
-            if(user.id == interaction.user) {
-                user.interactions.push(interaction);
-            }
-        }
-        console.log($scope.users[i].interactions);
-    }
-});
