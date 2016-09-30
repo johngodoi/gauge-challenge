@@ -14,12 +14,10 @@
 </head>
 <body>
     <h1>Usuários Influentes</h1>
-    <div>
+    <div ng-controller="SearchController">
         <h2>Busca</h2>
-        <label for="user-search">Usuário</label>
-        <input type="search" name="user-search" id="user-search" placeholder="digite o nome do usuário">
         <label for="brand-search">Marcas</label>
-        <input type="search" name="brand-search" id="brand-search" placeholder="digite o nome da marca">
+        <input type="search" name="brand-search" id="brand-search" placeholder="digite o nome da marca" ng-model="$scope.search">
     </div>
     <div class="content">
         <div ng-controller="UserListController" class="users">
@@ -27,9 +25,8 @@
                 <img src="{{userObj.picture.thumbnail}}" alt="" class="user-image">
                 <div class="user-name">{{userObj.name.title+" "+userObj.name.first+" "+userObj.name.last}}</div>
                 <div class="user-interactions-qtt"></div>
-                <div ng-repeat="interaction in userObj.interactions" class="user-interactions">
+                <div ng-repeat="interaction in userObj.interactions | filter:$scope.search" class="user-interactions">
                     <img src="{{interaction.brandObj.image}}" alt="{{interaction.brandObj.name}}">
-                    <div class="brand-name">{{interaction.brandObj.name}}</div>
                     {{interaction.type}}
                     <div class="user-brand-interaction-types">
                         <div class="user-brand-interaction-favorite"></div>

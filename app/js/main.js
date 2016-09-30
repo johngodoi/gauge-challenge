@@ -44,6 +44,10 @@ function setUpInteractioncs($scope) {
     });
 }
 
+gaugeChallengeApp.controller('SearchController', function SearchController($scope) {
+    $scope.search="";
+});
+
 gaugeChallengeApp.controller('UserListController', function UserListController($scope, $http) {
     getData($http, $scope);
 });
