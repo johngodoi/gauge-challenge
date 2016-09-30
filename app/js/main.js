@@ -40,8 +40,27 @@ function setUpInteractioncs($scope) {
         });
         if(!brnd.interactions) brnd.interactions = [];
         brnd.interactions.push(interactionObj);
+        interactionObj.brandName=brnd.name;
         interactionObj.brandObj = brnd;
     });
+}
+
+function customFilter($scope){
+    if($scope.interactions){
+        _.each($scope.users,function (user) {
+        _.each(user.interactions,function (interaction) {
+            if(interaction.brandName!=$scope.search);
+            });
+
+                });
+    }
+    if($scope.users){
+        var users= $scope.users;
+        _.each($scope.users, function (user) {
+            if(user.interactions.length>0) users.push(user);
+        })
+        $scope.users=users;
+    }
 }
 
 gaugeChallengeApp.controller('SearchController', function SearchController($scope) {

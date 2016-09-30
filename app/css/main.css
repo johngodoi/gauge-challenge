@@ -1,2 +1,4 @@
-body {
-  color: black; }
+.user {
+  width: 10em;
+  display: inline;
+  float: left; }

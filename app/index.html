@@ -3,6 +3,7 @@
 <head>
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../app/css/main.css">
 
     <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="../bower_components/underscore/underscore.js"></script>
@@ -17,14 +18,14 @@
     <div ng-controller="SearchController">
         <h2>Busca</h2>
         <label for="brand-search">Marcas</label>
-        <input type="search" name="brand-search" id="brand-search" placeholder="digite o nome da marca" ng-model="$scope.search">
+        <input type="search" name="brand-search" id="brand-search" placeholder="digite o nome da marca" ng-model="$scope.search" ng-change="customFilter($scope)">
     </div>
-    <div class="content">
+    <div class="content container container-fluid">
         <div ng-controller="UserListController" class="users">
-            <div ng-repeat="userObj in users" class="user">
+            <div ng-repeat="userObj in users" class="user col-md-3">
                 <img src="{{userObj.picture.thumbnail}}" alt="" class="user-image">
                 <div class="user-name">{{userObj.name.title+" "+userObj.name.first+" "+userObj.name.last}}</div>
-                <div class="user-interactions-qtt"></div>
+                <div class="user-interactions-qtt">{{userObj.interactions.length}}</div>
                 <div ng-repeat="interaction in userObj.interactions | filter:$scope.search" class="user-interactions">
                     <img src="{{interaction.brandObj.image}}" alt="{{interaction.brandObj.name}}">
                     {{interaction.type}}
